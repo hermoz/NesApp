@@ -1,0 +1,63 @@
+<div class="limiter animated slideInDown">
+    <div class="container-login100">
+        <div class="wrap-login100 p-t-50 p-b-90">
+
+            <!-- Incluimos en nuestro componente login login.component.ts la validación correspondiente en nuestro método de login-->
+
+            <!-- Definimos la variable #formulario para crear una referencia local al formulario desarrollado 
+            De modo que se crea la referencia local #formulario y se define como un ngForm: crea una instancia y la vincula a un formulario para
+            rastrear el valor agregado y el estado de validación -->
+            <!-- Añadimos nuestro método login() implementado en login.component y le hacemos referencia al formulario mandándolo
+            como argumento.-->
+            <form (ngSubmit)="login(formulario)" #formulario="ngForm" class="login100-form validate-form flex-sb flex-w">
+
+                <span class="login100-form-title p-b-51">
+                    Login
+                </span>
+
+                <!-- EMAIL: Se establece para el email la propia validación de emmail definido en formulario, de tipo requerido  -->
+                <!-- Definimos etiquetas <span> que se mostrarán según el estado del campo al que hacen referencia y buscamos en ngModel[]
+                    la propiedad que necesito -->
+                <!-- Decimos que aparezca el error si se ha enviado el formulario y que el formulario tenga errores en el campo email-->
+                <span *ngIf="formulario.submitted && formulario.controls['email'].errors" class="text-danger animated shake">Correo obligatorio</span>
+                <div class="wrap-input100 m-b-16">
+                    <input class="input100" type="text" name="email" [(ngModel)]="usuario.email" required email placeholder="Email">
+
+                    <span class="focus-input100"></span>
+                </div>
+
+                <!-- CONTRASEÑA: Se establece para la contraseña que sea de tipo requerido y tenga una extensión mínima para su validación -->
+                <!-- Decimos que aparezca el error si se ha enviado el formulario y que el formulario tenga errores en el campo nombre-->
+                <span *ngIf="formulario.submitted && formulario.controls['password'].errors" class="text-danger animated shake">Contraseña obligatoria. Mínimo 6 caracteres</span>
+                <div class="wrap-input100 m-b-16">
+                    <input class="input100" type="password" [(ngModel)]="usuario.password" required minlength="6" name="password" placeholder="Contraseña">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="flex-sb-m w-full p-t-3 p-b-24">
+                    <div class="contact100-form-checkbox">
+                        <!-- Incluyo aquí el valor booleano para recordar usuario-->
+                        <input [(ngModel)]="recordar" class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                        <label class="label-checkbox100" for="ckb1">
+                            Recordar mi usuario
+                        </label>
+                    </div>
+
+                    <div>
+                        <!-- En el caso de haber accedido al login y no posee cuenta pulsamos el enlace que nos lleva a la página anterior para el registro de una nueva cuenta-->
+                        <a routerLink="/registro" class="txt1">
+                            ¿No tienes cuenta?
+                        </a>
+                    </div>
+                </div>
+
+                <div class="container-login100-form-btn m-t-17">
+                    <button class="login100-form-btn" type="submit">
+                        Ingresar
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

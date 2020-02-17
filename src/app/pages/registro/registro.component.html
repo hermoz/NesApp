@@ -1,0 +1,70 @@
+<div class="limiter animated slideInDown">
+    <div class="container-login100">
+        <div class="wrap-login100 p-t-50 p-b-90">
+
+
+            <!-- Definimos la variable #formulario para crear una referencia local al formulario desarrollado 
+            De modo que se crea la referencia local #formulario y se define como un ngForm: crea una instancia y la vincula a un formulario para
+            rastrear el valor agregado y el estado de validación -->
+            <!-- Añadimos nuestro método onSubmit() implementado en registro.component y le hacemos referencia al formulario mandándolo
+            como argumento.-->
+            <form (ngSubmit)="onSubmit(formulario)" #formulario="ngForm" class="login100-form validate-form flex-sb flex-w">
+                <!-- Le paso el valor que tenga de referencia el formulario para el registro de validación-->
+                <span class="login100-form-title p-b-51">
+                        CREAR UNA CUENTA
+                    </span>
+
+                <!-- EMAIL: Se establece para el email el propio tipo email definido en formulario, de tipo requerido  -->
+                <!-- Definimos etiquetas <span> que se mostrarán según el estado del campo al que hacen referencia y buscamos en ngModel[]
+                    la propiedad que necesito -->
+                <!-- Decimos que aparezca el error si se ha enviado el formulario y que el formulario tenga errores en el campo email-->
+                <span *ngIf="formulario.submitted && formulario.controls['email'].errors" class="text-danger animated shake">Correo obligatorio</span>
+                <div class="wrap-input100 m-b-16">
+                    <input class="input100" type="email" name="email" [(ngModel)]="usuario.email" required email placeholder="Escriba su email">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <!-- NOMBRE: Se establece para el nombre que sea de tipo requerido y tenga una extensión mínima para su validación -->
+                <!-- Decimos que aparezca el error si se ha enviado el formulario y que el formulario tenga errores en el campo nombre-->
+                <span *ngIf="formulario.submitted && formulario.controls['nombre'].errors" class="text-danger animated shake">Nombre obligatorio. Mínimo 3 caracteres</span>
+
+                <div class="wrap-input100 m-b-16">
+                    <input class="input100" type="text" name="nombre" required minlength="3" [(ngModel)]="usuario.nombre" placeholder="Escriba su nombre">
+
+                    <span class="focus-input100"></span>
+                </div>
+
+                <!-- CONTRASEÑA: Se establece para la contraseña que sea de tipo requerido y tenga una extensión mínima para su validación -->
+                <!-- Decimos que aparezca el error si se ha enviado el formulario y que el formulario tenga errores en el campo nombre-->
+                <span *ngIf="formulario.submitted && formulario.controls['password'].errors" class="text-danger animated shake">Contraseña obligatoria. Mínimo 6 caracteres</span>
+                <div class="wrap-input100 m-b-16">
+                    <input class="input100" type="password" name="password" required minlength="6" [(ngModel)]="usuario.password" placeholder="Escriba su contraseña">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="flex-sb-m w-full p-t-3 p-b-24">
+                    <div class="contact100-form-checkbox">
+                        <input [(ngModel)]="recordar" class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                        <label class="label-checkbox100" for="ckb1">
+                                Recordar usuario
+                            </label>
+                    </div>
+
+                    <div>
+                        <!-- Este link nos redirige a nuestro componente login-->
+                        <a routerLink="/login" class="txt1">
+                                ¿Ya tienes cuenta? / Acceder
+                            </a>
+                    </div>
+                </div>
+
+                <div class="container-login100-form-btn m-t-17">
+                    <button class="login100-form-btn" type="submit">
+                            Crear cuenta nueva 
+                        </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
