@@ -4,6 +4,10 @@ import { UsuarioModel } from '../models/usuario.model';
 // Importamos para pipe
 import { map } from 'rxjs/operators';
 
+import { AngularFireAuth } from 'angularfire2/auth';
+
+
+
 
 // Este componente de servicio de autenticación no es necesario importarlo porque ya está de manera global mediante el decorador
 // con la propiedad: providedIn: 'root'
@@ -35,7 +39,7 @@ export class AuthService {
 
   // Inyectamos en el constructor el servicio HTTP de tipo HTTPCient
   // Incluimos en el constructor los servicios a los que llamaremos de forma eventual según necesidades
-  constructor( private http: HttpClient ) {
+  constructor( private http: HttpClient) {
     this.leerToken();
    }
 
@@ -47,7 +51,7 @@ export class AuthService {
   // Para realizar un código más limpio y obtener las mismas propiedades del usuario del authdata
   // password: usuario.password,
   // por ...usuario -> es lo mismo pero también añade el nombre, aunque podríamos trabajar sin incluirlo
-  // ... se denomina operador SPREAD, permite que permite que una expresión sea expandida en situaciones donde se esperan múltiples 
+  // ... se denomina operador SPREAD, permite que una expresión sea expandida en situaciones donde se esperan múltiples 
   // argumentos (llamadas a funciones) o múltiples elementos (arrays literales).
     const authData = {
       ...usuario,
@@ -136,6 +140,8 @@ leerToken() {
     if ( this.userToken.length < 2 ) {
       return false;
     }
+
+    return true;
 
     // es posible que el token tenga más de 2 caracteres pero el token hata expirado
 

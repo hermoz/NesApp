@@ -1,0 +1,59 @@
+<br>
+<br>
+<h2>Proveedor</h2>
+<hr>
+
+<!-- Botón para volver a la página de listado de proyectos-->
+<div class="row text-right">
+    <div class="col">
+        <button class="btn btn-danger" routerLink="/proveedor-lista">
+        <i class="fa fa-arrow-circle-left"></i>
+      Volver a Listado de Proveedores
+    </button>
+    </div>
+</div>
+
+
+<!-- Formulario de datos de proyecto-->
+<div class="row animated fadeIn faster">
+    <div class="col">
+
+        <!-- Método declarado en el componente correspondiente-->
+        <form (ngSubmit)="save( formulario )" #formulario="ngForm">
+
+            <div class="form-group">
+                <label>Firebase ID</label>
+                <input type="text" class="form-control" placeholder="Firebase ID" [(ngModel)]="proveedor.id" name="id" disabled="disabled">
+                <small class="form-text text-muted">Campo autogenerado</small>
+            </div>
+
+            <!-- Indicamos este campo al menos como requerido para dar por válido el formulario -->
+            <div class="form-group">
+                <label>Proveedor</label>
+                <input type="text" class="form-control" placeholder="Nombre de la empresa" [(ngModel)]="proveedor.titulo" name="titulo" required>
+            </div>
+
+            <div class="form-group">
+                <label>Descripción</label>
+                <input type="text" class="form-control" placeholder="Descripción" [(ngModel)]="proveedor.descripcion" name="descripcion">
+            </div>
+
+            <div class="form-group">
+                <label>Teléfono</label>
+                <input type="text" class="form-control" [(ngModel)]="proveedor.telefono" name="telefono" placeholder="Teléfono">
+            </div>
+
+            <hr>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary w-30">
+          <i class="fa fa-save"></i>
+          Guardar cambios
+        </button>
+            </div>
+
+
+        </form>
+
+
+    </div>
+</div>

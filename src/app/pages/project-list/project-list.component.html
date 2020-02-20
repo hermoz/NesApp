@@ -1,0 +1,84 @@
+<br>
+<br>
+<h2>Listado de Proyectos</h2>
+<hr>
+
+<!-- Cuando pulsamos el botón añadir nos conduce a la página donde rellenamos el formulario para 
+añadir un nuevo proyecto al listado -->
+<!-- Nuestra ruta al proyectyo la definimos indicando el id de modo que, en este caso, añadimos a nuestro
+routerlink "new" asociado al id de la ruta definida-->
+<div class="row">
+    <div class="col text-right">
+        <!-- esta definición de router link carece de [ ] porque es estática -->
+        <button routerLink="/project/new" class="btn btn-info">
+    <i class="fa fa-plus"></i>
+    Añadir proyecto
+  </button>
+    </div>
+</div>
+
+
+<!-- La tabla permanece oculta mientras aparece el mensaje de carga de datos de la database   -->
+<table *ngIf="!cargando && projectList.length > 0" class="table mt-4 animated fadeIn faster animated fadeIn faster">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">- -</th>
+            <th scope="col">Título Proyecto</th>
+            <th scope="col">Ubicación</th>
+            <th scope="col">Tipo Construcción</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let project of projectList; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ project.titulo }}</td>
+            <td>{{ project.ubicacion }}</td>
+            <td>{{ project.tipo }}</td>
+            <td>
+
+                <label *ngIf="project.estado" class="badge badge-warning">En curso</label>
+                <label *ngIf="!project.estado" class="badge badge-secondary">Realizado</label>
+
+            </td>
+            <td>
+                <!-- Se define routerlink con [ ] por ser dinámica, tendrá el valor de la configuracón definida-->
+                <button class="btn btn-outline-dark mr-1" [routerLink]="['/project', project.id ]">
+                    <i class="fa fa-pencil fa-1x"></i>
+                    </button>
+
+                <!-- Para eliminar el proyecto seleccionado del array necesito conocer la posición -->
+                <button (click)="deleteProject( project, i )" class=" btn btn-danger ">
+        <i class="fa fa-trash "></i>
+      </button>
+
+
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Ventana obtenida al que no encontrar registros en la base de datos 
+Queremos que aparezca una vez ha terminado la carga y no se han encontrado datos -->
+<div *ngIf="!cargando && projectList.length===0 " class="alert alert-warning text-center mt-3 animated fadeIn faster ">
+    <h4 class="alert-heading ">No hay registros</h4>
+    <p>
+        <i class="fa fa-exclamation-circle fa-3x "></i>
+    </p>
+</div>
+
+
+<!-- Ventana obtenida durante la carga de datos de la tabla -->
+<!-- Comprobar que sale! al prinicpio no por el ngif cargando -->
+<!--  -->
+<div *ngIf="cargando " class="alert alert-info text-center mt-3 animated fadeIn faster ">
+    <h4 class="alert-heading ">Cargando datos</h4>
+    <p>
+        <i class="fa fa-cog fa-spin fa-3x "></i>
+
+    </p>
+    <p class="mb-0 ">
+        Espere por favor...
+    </p>
+</div>

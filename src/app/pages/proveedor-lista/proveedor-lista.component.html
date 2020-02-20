@@ -1,0 +1,107 @@
+<br>
+<br>
+<h2>Proveedores</h2>
+<hr>
+
+<!-- Cuando pulsamos el botón añadir nos conduce a la página donde rellenamos el formulario para 
+añadir un nuevo proyecto al listado -->
+<!-- Nuestra ruta al proyectyo la definimos indicando el id de modo que, en este caso, añadimos a nuestro
+routerlink "new" asociado al id de la ruta definida-->
+<div class="row">
+    <div class="col text-right">
+        <!-- esta definición de router link carece de [ ] porque es estática -->
+        <button routerLink="/proveedor/new" class="btn btn-info">
+    <i class="fa fa-plus"></i>
+    Añadir proveedor
+  </button>
+    </div>
+</div>
+<!-- -------------------------------------------------------------------------------------------------------------- -->
+<div class="row card-group">
+    <div class="col-4" *ngFor="let proveedor of proveedorLista; let i = index">
+        <br>
+        <div class="card animated fadeIn fast">
+            <div class="card-body">
+                <h4 class="card-title">{{ proveedor.titulo }}</h4>
+                <p class="card-text">{{ proveedor.descripcion }} </p>
+                <p class="card-text"><small class="text-muted">{{ proveedor.telefono }}</small></p>
+
+                <!-- 
+                <button (click)="ampliarInfo()" type="button" class="btn btn-outline-secondary">
+                    Ampliar
+                </button>
+                -->
+
+                <br>
+
+                <!-- Para eliminar el proyecto seleccionado del array necesito conocer la posición -->
+                <button (click)="borrarProveedor( proveedor, i )" class=" btn btn-danger ">
+                    Eliminar
+                </button>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+
+
+
+<table *ngIf="!cargando && proveedorLista.length > 0" class="table mt-4 animated fadeIn faster animated fadeIn faster">
+    <thead class="thead-dark">
+        <tr>
+            <th>**</th>
+            <th style="width: 10%" scope="col ">Nombre Proveedor</th>
+            <th style="width: 60%" scope="col ">Descripcion</th>
+            <th scope="col ">Telefono</th>
+            <th scope="col ">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let proveedor of proveedorLista; let i=i ndex ">
+            <th scope="row ">{{ i + 1 }}</th>
+            <td>{{ proveedor.titulo }}</td>
+            <td>{{ proveedor.descripcion }}</td>
+            <td>{{ proveedor.telefono }}</td>
+
+            <td>
+
+                <button class="btn btn-outline-dark mr-1 " [routerLink]="[ '/proveedor', proveedor.id ] ">
+                    <i class="fa fa-pencil fa-1x "></i>
+                    </button>
+
+
+                <button (click)="borrarProveedor( proveedor, i ) " class=" btn btn-danger ">
+        <i class="fa fa-trash "></i>
+      </button>
+
+
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+-->
+
+<!-- Ventana obtenida al que no encontrar registros en la base de datos 
+Queremos que aparezca una vez ha terminado la carga y no se han encontrado datos -->
+<div *ngIf="!cargando && proveedorLista.length===0 " class="alert alert-warning text-center mt-3 animated fadeIn faster ">
+    <h4 class="alert-heading ">No hay registros</h4>
+    <p>
+        <i class="fa fa-exclamation-circle fa-3x "></i>
+    </p>
+</div>
+
+
+<!-- Ventana obtenida durante la carga de datos de la tabla -->
+<!-- Comprobar que sale! al prinicpio no por el ngif cargando -->
+<!--  -->
+<div *ngIf="cargando " class="alert alert-info text-center mt-3 animated fadeIn faster ">
+    <h4 class="alert-heading ">Cargando datos</h4>
+    <p>
+        <i class="fa fa-cog fa-spin fa-3x "></i>
+
+    </p>
+    <p class="mb-0 ">
+        Espere por favor...
+    </p>
+</div>

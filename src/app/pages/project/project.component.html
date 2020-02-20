@@ -1,0 +1,79 @@
+<br>
+<br>
+<h2>Proyecto</h2>
+<hr>
+
+<!-- Botón para volver a la página de listado de proyectos-->
+<div class="row text-right">
+    <div class="col">
+        <button class="btn btn-danger" routerLink="/project-list">
+        <i class="fa fa-arrow-circle-left"></i>
+      Volver a Listado de Proyectos
+    </button>
+    </div>
+</div>
+
+
+<!-- Formulario de datos de proyecto-->
+<div class="row animated fadeIn faster">
+    <div class="col">
+
+        <!-- Método declarado en el componente correspondiente-->
+        <form (ngSubmit)="save( formulario )" #formulario="ngForm">
+
+            <div class="form-group">
+                <label>Firebase ID</label>
+                <input type="text" class="form-control" placeholder="Firebase ID" [(ngModel)]="project.id" name="id" disabled="disabled">
+                <small class="form-text text-muted">Campo autogenerado</small>
+            </div>
+
+            <!-- Indicamos este campo al menos como requerido para dar por válido el formulario -->
+            <div class="form-group">
+                <label>Título de Proyecto</label>
+                <input type="text" class="form-control" placeholder="Título del proyecto" [(ngModel)]="project.titulo" name="titulo" required>
+            </div>
+
+            <div class="form-group">
+                <label>Ubicación</label>
+                <input type="text" class="form-control" placeholder="Ubicación" [(ngModel)]="project.ubicacion" name="ubicacion">
+            </div>
+
+            <div class="form-group">
+                <label>Tipo de Construcción</label>
+                <input type="text" class="form-control" [(ngModel)]="project.tipo" name="tipo" placeholder="Tipo de Construcción">
+            </div>
+
+            <div class="form-group">
+                <label>Estado</label>
+                <br>
+                <!-- Por defecto para este botón que contempla dos estados del proyecto pondremos que por defecto, 
+                a la creación del projecto esté por defecto en curso-->
+                <!-- si el botón está a true, al hacer click lo ponemos a false (pendiente)-->
+                <button *ngIf="project.estado" (click)="project.estado== false" class="btn btn-outline-success w-40" type="button">
+                  <i class="fa fa-circle fa-1x"></i>
+          En curso
+        </button>
+
+                <button *ngIf="!project.estado" (click)="project.estado== true" class="btn btn-outline-danger w-40" type="button">
+                  <i class="fa fa-check-circle fa-1x"></i>
+           Realizado
+        </button>
+
+            </div>
+
+
+
+            <hr>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary w-30">
+          <i class="fa fa-save"></i>
+          Guardar cambios
+        </button>
+            </div>
+
+
+        </form>
+
+
+    </div>
+</div>

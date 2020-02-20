@@ -7,6 +7,8 @@ import { AuthService } from '../../services/auth.service';
 
 import Swal from 'sweetalert2';
 
+
+
  
 @Component({
   selector: 'app-login',
@@ -38,6 +40,7 @@ export class LoginComponent implements OnInit {
     }
   }
   // En el caso de que la validación no sea correcta no se devuelve nada
+
   login( form: NgForm ) {
 
     if (  form.invalid ) { return; }
